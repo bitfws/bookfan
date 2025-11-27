@@ -39,6 +39,7 @@ export default () => {
         img.loading = 'lazy';
 
         const info = document.createElement('div');
+        info.classList.add('cardInfo');
         info.appendChild(title);
 
         const hr = document.createElement('hr');
@@ -79,7 +80,7 @@ export default () => {
         <hr />
         <button>Explore</button>
       </div>
-      <img src="./images/hero-image.webp" alt="hero-image" loading="lazy" />
+      <img src="./images/jules-verne-book.webp" alt="hero-image-jules-verne" loading="lazy" />
     </div>
     <div id="sample-genres">
     </div>

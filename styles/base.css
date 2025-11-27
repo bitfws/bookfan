@@ -2,6 +2,9 @@
   --primary-color: #333446;
   --secondary-color: #ffffff;
   --accent: #f3f5f4;
+  --gray: #f1f3f5;
+  --dark: #171717;
+  --border-color: #dde5ec;
 }
 
 * {
@@ -112,6 +115,7 @@ footer {
   justify-content: space-evenly;
   align-items: center;
   gap: 10px;
+  overflow: hidden;
 
   div,
   img {
@@ -148,36 +152,74 @@ footer {
   }
 }
 
+#sample-genres {
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media (max-width: 675px) {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
 #sample-books {
   width: 95%;
   margin: auto;
 
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+
   section {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     gap: 40px;
     margin: 60px 20px;
-    background-color: var(--accent);
     padding: 20px;
     border-radius: 10px;
     cursor: pointer;
-    box-shadow: 0 2px 5px #33344623;
+    box-shadow: 0 2px 5px #1d232e23;
 
-    @media (min-width: 675px) {
+    &:hover {
+      transform: scale(1.03);
+      transition: all linear 300ms;
+    }
+
+    @media (max-width: 675px) {
       flex-direction: row;
     }
 
+    @media (min-width: 675px) {
+      width: 30%;
+    }
+
     .card {
-      &:hover {
-        transform: scale(1.03);
-        transition: all linear 300ms;
-      }
+      background-size: cover;
       img {
         @media (min-width: 675px) {
           height: 300px;
         }
       }
+    }
+
+    .cardInfo {
+      display: flex;
+      flex-direction: column;
     }
   }
 }
