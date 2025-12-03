@@ -5,6 +5,9 @@
   --gray: #f1f3f5;
   --dark: #171717;
   --border-color: #dde5ec;
+
+  --radius: 10px;
+  --shadow: 0 2px 5px #1d232e23;
 }
 
 * {
@@ -24,7 +27,7 @@
 hr {
   width: 80%;
   border-bottom: 1px solid #d2d8df;
-  margin: 10px auto;
+  margin: 20px auto;
 }
 
 button,
@@ -36,6 +39,19 @@ button,
   color: var(--secondary-color);
 }
 
+textarea {
+  resize: none;
+}
+
+#content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 90%;
+  margin: 50px auto;
+}
+
 /* header */
 header,
 footer {
@@ -43,8 +59,9 @@ footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
+  padding: 10px 50px;
   font-size: large;
+  height: 80px;
 
   * {
     color: var(--secondary-color);
@@ -103,11 +120,53 @@ footer {
   font-size: 0.8rem;
 }
 
-/* home */
+#book-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  @media (min-width: 992px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .book {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    background-color: var(--gray);
+    border-radius: var(--radius);
+    height: auto;
+    width: 90%;
+    margin: auto;
+    box-shadow: var(--shadow);
+
+    img {
+      height: 300px;
+      width: 200px;
+      margin: auto;
+    }
+
+    #info {
+      .description {
+        text-align: justify;
+      }
+    }
+
+    @media (min-width: 992px) {
+      flex-direction: row;
+      width: initial;
+      margin: auto;
+    }
+  }
+}
+
+/* HOME */
 #hero {
   background-color: var(--accent);
   height: 70vh;
-  width: 95%;
+  width: 100%;
   margin: 10px auto;
   border-radius: 10px;
   display: flex;
@@ -119,12 +178,13 @@ footer {
 
   div,
   img {
-    height: 100%;
+    height: 80%;
     width: 50%;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    border-radius: var(--radius);
   }
 
   @media (min-width: 675px) {
@@ -132,94 +192,58 @@ footer {
   }
 }
 
-#sample-genres {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 50px auto;
+#category-container {
+  width: 70%;
+  margin: 20px;
 
   div {
     display: flex;
-    align-items: center;
-    gap: 10px;
-
-    button {
-      &:hover {
-        transform: scale(1.03);
-        transition: all linear 300ms;
-      }
-    }
-  }
-}
-
-#sample-genres {
-  div {
-    display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
 
     @media (max-width: 675px) {
       display: grid;
-      grid-template-columns: repeat(3, 100px);
-      justify-content: center;
-      align-items: center;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
     }
   }
 }
 
-#sample-books {
-  width: 95%;
-  margin: auto;
+/* BOOKS */
+#book-finder {
+  width: 80%;
+  padding: 10px;
+  border: 1px solid var(--gray);
+  border-radius: var(--radius);
+  margin: 30px auto;
+  text-align: center;
+
+  :placehoder {
+    text-align: center;
+  }
+}
+
+/* CONTACT */
+#contact-form {
+  width: 80%;
+
+  @media (min-width: 675px) {
+    width: 30%;
+  }
 
   div {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
+    margin: 10px auto;
 
-    @media (min-width: 768px) {
-      flex-direction: row;
-      justify-content: center;
+    input,
+    textarea {
+      border: 1px solid var(--gray);
+      border-radius: var(--radius);
+      padding: 10px;
     }
   }
-
-  section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
-    margin: 60px 20px;
-    padding: 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    box-shadow: 0 2px 5px #1d232e23;
-
-    &:hover {
-      transform: scale(1.03);
-      transition: all linear 300ms;
-    }
-
-    @media (max-width: 675px) {
-      flex-direction: row;
-    }
-
-    @media (min-width: 675px) {
-      width: 30%;
-    }
-
-    .card {
-      background-size: cover;
-      img {
-        @media (min-width: 675px) {
-          height: 300px;
-        }
-      }
-    }
-
-    .cardInfo {
-      display: flex;
-      flex-direction: column;
-    }
+  .btn {
+    width: 100%;
   }
 }

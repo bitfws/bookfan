@@ -1,72 +1,37 @@
-import { getBooks } from '../scripts/utils.js';
+import Books from '../scripts/Books.mjs';
+import { displayBooks } from '../scripts/utils.js';
 
 export default () => {
-  const content = document.createElement('div');
-  const genreContent = document.createElement('div');
   const books = [];
-  const genres = [
-    'Fantasy',
-    'Science Fiction',
-    'Horror',
-    'Romance',
-    'Mystery',
-    'Adventure',
-  ];
+  const categories = ['Fantasy', 'Horror', 'Romance', 'Mystery', 'Adventure'];
 
-  getBooks()
+  const newBooks = new Books();
+
+  newBooks
+    .books()
     .then((data) => {
       data.forEach((book, index) => {
-        if (index < 3) {
+        if (index < 4) {
           books.push(book);
         }
       });
 
-      books.forEach((book) => {
-        const section = document.createElement('section');
+      displayBooks(books);
 
-        const title = document.createElement('h3');
-        title.textContent = book.volumeInfo.title;
+      // Categories
+      const categoryContainer = document.createElement('div');
 
-        const description = document.createElement('p');
-        description.textContent = book.volumeInfo.description.split('.')[0];
-
-        const cardDiv = document.createElement('div');
-        cardDiv.classList.add('card');
-
-        const img = document.createElement('img');
-        img.src = book.volumeInfo.imageLinks.thumbnail;
-        img.alt = book.volumeInfo.title;
-        img.loading = 'lazy';
-
-        const info = document.createElement('div');
-        info.classList.add('cardInfo');
-        info.appendChild(title);
-
-        const hr = document.createElement('hr');
-        info.appendChild(hr);
-        info.appendChild(description);
-
-        cardDiv.appendChild(img);
-        section.appendChild(cardDiv);
-        section.appendChild(info);
-
-        content.appendChild(section);
-      });
-
-      document.getElementById('sample-books').innerHTML = content.outerHTML;
-
-      genres.forEach((genre) => {
+      categories.forEach((category) => {
         const button = document.createElement('button');
-        button.textContent = genre;
-
-        genreContent.appendChild(button);
+        button.textContent = category;
+        categoryContainer.appendChild(button);
       });
 
-      document.getElementById('sample-genres').innerHTML =
-        genreContent.outerHTML;
+      document.getElementById('category-container').innerHTML =
+        categoryContainer.outerHTML;
     })
     .catch((error) => {
-      document.getElementById('sample-books').innerHTML =
+      document.getElementById('book-container').innerHTML =
         'Failed to load books. Please try again later.';
       console.error('Error fetching books:', error);
     });
@@ -82,9 +47,9 @@ export default () => {
       </div>
       <img src="./images/jules-verne-book.webp" alt="hero-image-jules-verne" loading="lazy" />
     </div>
-    <div id="sample-genres">
-    </div>
-    <div id="sample-books">
-    </div>
+    <hr />
+    <div id="category-container"></div>
+    <hr />
+    <div id="book-container"></div>
   `;
 };

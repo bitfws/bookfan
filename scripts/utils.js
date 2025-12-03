@@ -1,21 +1,16 @@
-const BASE_URI = 'https://www.googleapis.com/books/v1/volumes';
-
-export async function getBooks(query = 'fantasy') {
-  try {
-    const url = new URL(BASE_URI);
-    url.searchParams.append('q', query);
-
-    const response = await fetch(url);
-
-    if (!response.ok) {
-      throw new Error(`Error ${response.status}: ${response.statusText}`);
-    }
-
-    const data = await response.json();
-
-    return data.items || [];
-  } catch (err) {
-    console.error('Error getting books:', err);
-    throw err;
-  }
+export function displayBooks(books) {
+  const bookContainer = document.getElementById('book-container');
+  bookContainer.innerHTML = books
+    .map(
+      (book) => `<div class="book">
+                    <img src=${book.volumeInfo.imageLinks.thumbnail} alt=${book.volumeInfo.title} loading ='lazy';/>
+                    <div id='info'>
+                      <h3>${book.volumeInfo.title}</h3>
+                      <h2>${book.volumeInfo.authors}</h2>
+                      <hr />
+                      <p class='description'>${book.volumeInfo.description}</p>
+                    </div>
+                  </div>`
+    )
+    .join('');
 }
