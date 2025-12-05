@@ -52,6 +52,19 @@ textarea {
   margin: 50px auto;
 }
 
+#cookies {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--gray);
+  min-width: 600px;
+  text-align: center;
+  padding: 10px;
+  box-shadow: var(--shadow);
+  border-radius: 10px;
+}
+
 /* header */
 header,
 footer {
@@ -77,6 +90,7 @@ footer {
   }
 
   nav {
+    z-index: 10;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -142,6 +156,12 @@ footer {
     margin: auto;
     box-shadow: var(--shadow);
 
+    small {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+    }
+
     img {
       height: 300px;
       width: 200px;
@@ -149,6 +169,13 @@ footer {
     }
 
     #info {
+      .book-details {
+        a {
+          text-decoration: underline;
+          color: blue;
+        }
+      }
+
       .description {
         text-align: justify;
       }
@@ -200,11 +227,11 @@ footer {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    gap: 10px;
 
     @media (max-width: 675px) {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
     }
   }
 }
@@ -246,4 +273,24 @@ footer {
   .btn {
     width: 100%;
   }
+}
+
+/* animation */
+@keyframes DownTop {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.downtop {
+  animation: DownTop 0.8s ease-out forwards;
+}
+
+.downtop {
+  opacity: 0;
 }

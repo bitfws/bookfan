@@ -1,9 +1,11 @@
 import router from './router.js';
 import header from './header.js';
 import footer from './footer.js';
+import cookies from './cookies.js';
 
 header();
 footer();
+cookies();
 
 window.addEventListener('click', (e) => {
   if (e.target.matches('[data-link]')) {

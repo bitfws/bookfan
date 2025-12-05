@@ -2,12 +2,14 @@ import home from '../pages/home.js';
 import books from '../pages/books.js';
 import details from '../pages/details.js';
 import contact from '../pages/contact.js';
+import congratulations from '../pages/congratulations.js';
 
 const routes = {
   '/': { title: 'Home', render: home },
   '/home': { title: 'Home', render: home },
   '/books': { title: 'Books', render: books },
   '/contact': { title: 'Contact', render: contact },
+  '/congratulations': { title: 'Congratulations', render: congratulations },
 };
 
 export default function router() {
@@ -20,7 +22,7 @@ export default function router() {
     if (dynamicRoute) {
       const id = dynamicRoute[1];
       Object.assign(routes, {
-        [`/book/${id}`]: { title: 'Book Details', render: details(id) },
+        [`/book/${id}`]: { title: 'Book Details', render: details },
       });
       page = routes[`/book/${id}`];
     }
@@ -38,5 +40,11 @@ function goPage(page) {
   if (page) {
     document.title = `BookFan | ${page.title}`;
     document.getElementById('content').innerHTML = page.render();
+
+    if (location.pathname === '/congratulations') {
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 10000);
+    }
   }
 }
