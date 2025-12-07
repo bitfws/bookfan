@@ -1,6 +1,14 @@
+import router from './router.js';
+
 export function displayBooks(books) {
   const details = location.pathname.split('/')[1];
   const bookContainer = document.getElementById('book-container');
+
+  if (!books || books.length === 0) {
+    bookContainer.innerHTML = `
+      <div class="loader">loading...</div>
+    `;
+  }
 
   bookContainer.innerHTML = books
     .map((book) => {
@@ -30,7 +38,6 @@ export function displayBooks(books) {
           <a href="/book/${book.id}" data-link>Details</a>
         </small>
         <hr />
-
       `
           : '';
 
@@ -51,6 +58,34 @@ export function displayBooks(books) {
       `;
     })
     .join('');
+}
+
+export function displayCategories(categories) {
+  const catContainer = document.getElementById('category-container');
+  if (catContainer) {
+    catContainer.innerHTML = '';
+    const categoryDiv = document.createElement('div');
+    categoryDiv.id = 'categories';
+
+    categories.forEach((category) => {
+      const btn = document.createElement('button');
+      btn.textContent = category;
+      btn.addEventListener('click', () => {
+        setLocalStorage('category', category);
+        history.pushState('', '', '/books');
+        router();
+      });
+      categoryDiv.appendChild(btn);
+    });
+
+    catContainer.appendChild(categoryDiv);
+  }
+}
+
+export async function getCategories() {
+  const categoryRes = await fetch('../data/categories.json');
+  const { categories } = await categoryRes.json();
+  return await categories;
 }
 
 export function setLocalStorage(value, data) {

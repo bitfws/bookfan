@@ -1,48 +1,43 @@
 import Books from '../scripts/Books.mjs';
-import { displayBooks } from '../scripts/utils.js';
+import router from '../scripts/router.js';
+import { displayBooks, displayCategories } from '../scripts/utils.js';
 
 export default () => {
-  const books = [];
-  const newBooks = new Books();
+  const init = async () => {
+    try {
+      const categoryRes = await fetch('../data/categories.json');
+      const { categories } = await categoryRes.json();
 
-  // Fetch categories from JSON file
-  fetch('../data/categories.json')
-    .then((response) => response.json())
-    .then((categoriesData) => {
-      const categories = categoriesData.categories;
+      const newBooks = new Books();
+      const allBooks = await newBooks.books();
+      const books = allBooks.slice(0, 4);
 
-      newBooks
-        .books()
-        .then((data) => {
-          data.forEach((book, index) => {
-            if (index < 4) {
-              books.push(book);
-            }
-          });
+      // Render books
 
-          displayBooks(books);
+      displayBooks(books);
 
-          // Categories
-          const categoryContainer = document.createElement('div');
+      // Render categories
+      displayCategories(Object.keys(categories));
+    } catch (error) {
+      console.error(error);
+      document.getElementById('book-container').innerHTML =
+        'Failed to load books. Please try again later.';
+    }
+  };
 
-          categories.forEach((category) => {
-            const button = document.createElement('button');
-            button.textContent = category;
-            categoryContainer.appendChild(button);
-          });
+  // Ensure DOM exists before running init()
+  requestAnimationFrame(init);
 
-          document.getElementById('category-container').innerHTML =
-            categoryContainer.outerHTML;
-        })
-        .catch((error) => {
-          document.getElementById('book-container').innerHTML =
-            'Failed to load books. Please try again later.';
-          console.error('Error fetching books:', error);
-        });
-    })
-    .catch((error) => {
-      console.error('Error fetching categories:', error);
-    });
+  // Explore Button
+  requestAnimationFrame(() => {
+    const exploreBtn = document.getElementById('explore');
+    if (exploreBtn) {
+      exploreBtn.addEventListener('click', () => {
+        history.pushState('', '', '/books');
+        router();
+      });
+    }
+  });
 
   return `
     <div id="hero">
@@ -51,13 +46,15 @@ export default () => {
         <p>Welcome to</p>
         <h1>BookFan</h1>
         <hr />
-        <button>Explore</button>
+        <button id='explore'>Explore</button>
       </div>
-      <img class='downtop' src="/images/jules-verne-book.webp" alt="hero-image-jules-verne" loading="lazy" />
+      <img class='downtop' src="images/jules-verne-book.webp" alt="hero-image-jules-verne" loading="lazy" />
     </div>
     <hr />
     <div id="category-container" class='downtop'></div>
     <hr />
+    <h3>Recommendations</h3>
+    <br />
     <div id="book-container" class='downtop'></div>
   `;
 };

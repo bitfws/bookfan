@@ -14,7 +14,6 @@ const routes = {
 
 export default function router() {
   const path = location.pathname;
-
   let page = routes[path];
 
   if (!page) {
@@ -44,7 +43,7 @@ function goPage(page) {
     if (location.pathname === '/congratulations') {
       setTimeout(() => {
         window.location.href = '/';
-      }, 10000);
+      }, 5000);
     }
   }
 }

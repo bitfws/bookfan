@@ -1,5 +1,5 @@
 :root {
-  --primary-color: #333446;
+  --primary-color: #000000;
   --secondary-color: #ffffff;
   --accent: #f3f5f4;
   --gray: #f1f3f5;
@@ -66,13 +66,14 @@ textarea {
 }
 
 /* header */
+
 header,
 footer {
   background-color: var(--primary-color);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 50px;
+  padding: 5px 50px;
   font-size: large;
   height: 80px;
 
@@ -81,7 +82,7 @@ footer {
   }
 
   #navburger {
-    z-index: 5;
+    z-index: 10;
     font-size: 20px;
 
     @media (min-width: 675px) {
@@ -90,13 +91,13 @@ footer {
   }
 
   nav {
-    z-index: 10;
+    z-index: 5;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    position: absolute;
+    position: fixed;
     height: 100vh;
     width: 100%;
     top: -100vh;
@@ -189,6 +190,11 @@ footer {
   }
 }
 
+#loading {
+  padding: 10px;
+  text-align: center;
+}
+
 /* HOME */
 #hero {
   background-color: var(--accent);
@@ -272,6 +278,19 @@ footer {
   }
   .btn {
     width: 100%;
+  }
+}
+
+#congratulations-message {
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  strong {
+    font-weight: bold;
   }
 }
 

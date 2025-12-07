@@ -1,8 +1,8 @@
 import Books from '../scripts/Books.mjs';
-import { displayBooks } from '../scripts/utils.js';
+import { displayBooks, getLocalStorage } from '../scripts/utils.js';
 
 export default () => {
-  let bookCategory = 'fantasy';
+  let bookCategory = getLocalStorage('category') ?? 'fantasy';
   const books = [];
 
   const newBooks = new Books();
@@ -32,6 +32,7 @@ export default () => {
 
   return `
     <input id="book-finder" placeholder="Search by category" />
+    <div id="category-container" class='downtop'></div>
     <hr />
     <div id="book-container"></div>
   `;

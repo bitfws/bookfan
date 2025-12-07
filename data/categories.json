@@ -1,3 +1,9 @@
 {
-  "categories": ["Fantasy", "Horror", "Romance", "Mystery", "Adventure"]
+  "categories": {
+    "Fantasy": ["High Fantasy", "Urban Fantasy", "Dark Fantasy"],
+    "Horror": ["Gothic", "Psychological", "Supernatural"],
+    "Romance": ["Contemporary", "Historical", "Paranormal"],
+    "Mystery": ["Detective", "Thriller", "Cozy Mystery"],
+    "Adventure": ["Action", "Survival", "Travel"]
+  }
 }
