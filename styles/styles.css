@@ -37,6 +37,12 @@ button,
   padding: 10px 15px;
   border-radius: 10px;
   color: var(--secondary-color);
+  transition: transform 300ms ease-in-out;
+  box-shadow: var(--shadow);
+
+  &:hover {
+    transform: scale(1.1);
+  }
 }
 
 textarea {
@@ -152,10 +158,19 @@ footer {
     gap: 30px;
     background-color: var(--gray);
     border-radius: var(--radius);
-    height: auto;
     width: 90%;
     margin: auto;
     box-shadow: var(--shadow);
+    overflow: hidden;
+
+    max-height: 500px;
+    transition: max-height 0.8s ease, padding 0.3s ease;
+
+    &:hover {
+      padding: 10px;
+      max-height: 2000px;
+      cursor: pointer;
+    }
 
     small {
       display: inline-block;
