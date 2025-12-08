@@ -3,6 +3,7 @@ import router from './router.js';
 export function displayBooks(books) {
   const details = location.pathname.split('/')[1];
   const bookContainer = document.getElementById('book-container');
+  const currentPage = window.location.pathname.split('/')[1] === 'book';
 
   if (!books || books.length === 0) {
     bookContainer.innerHTML = `
@@ -55,6 +56,9 @@ export function displayBooks(books) {
             }</p>
           </div>
         </div>
+        ${
+          currentPage ? '<div id="reviews">There are no reviews yet.</div>' : ''
+        }
       `;
     })
     .join('');

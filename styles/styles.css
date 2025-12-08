@@ -164,10 +164,9 @@ footer {
     overflow: hidden;
 
     max-height: 500px;
-    transition: max-height 0.8s ease, padding 0.3s ease;
+    transition: max-height 0.8s ease;
 
     &:hover {
-      padding: 10px;
       max-height: 2000px;
       cursor: pointer;
     }
@@ -202,6 +201,13 @@ footer {
       width: initial;
       margin: auto;
     }
+  }
+
+  #reviews {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 }
 
@@ -245,13 +251,13 @@ footer {
   margin: 20px;
 
   div {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
     justify-content: space-evenly;
     align-items: center;
     gap: 10px;
 
     @media (max-width: 675px) {
-      display: grid;
       grid-template-columns: repeat(2, 1fr);
     }
   }

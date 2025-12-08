@@ -32,7 +32,6 @@ export default () => {
 
   return `
     <input id="book-finder" placeholder="Search by category" />
-    <div id="category-container" class='downtop'></div>
     <hr />
     <div id="book-container"></div>
   `;
